@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches:
+      - v1
       - v2
 
   # Build daily on 00:00 UTC
