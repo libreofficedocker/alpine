@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - v2
+
+  # Build daily on 00:00 UTC
+  schedule:
+    - cron: '0 0 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - id: alpine
+        uses: actions-matrix/alpine-matrix-action@v1
+        with:
+          count: 10
+    outputs:
+      version: ${{ steps.alpine.outputs.version }}
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [generate]
+    # continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ${{ fromJson(needs.generate.outputs.version) }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: libreofficedocker/alpine
+          tags: type=raw,value=${{ matrix.version }}
+
+      - name: Build and push
+        uses: docker/bake-action@v3
+        env:
+          ALPINE_VERSION: ${{ matrix.version }}
+        with:
+          files: |
+            docker-bake.hcl
+            ${{ steps.meta.outputs.bake-file }}
+          push: ${{ github.event_name != 'pull_request' }}
+
+      - name: Docker Metadata Summary
+        uses: dockerbakery/docker-metadata-summary@v1
