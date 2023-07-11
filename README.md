@@ -4,8 +4,8 @@ The base image for Libreoffice in Docker built on top of Alpine releases
 
 ### Pre-built image
 
-[![Release](https://github.com/libreofficedocker/alpine/actions/workflows/release.yml/badge.svg)](https://github.com/libreoffice-docker/libreoffice-unoserver/actions/workflows/release.yml)
-[![Test](https://github.com/libreofficedocker/alpine/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/libreoffice-docker/libreoffice-unoserver/actions/workflows/test.yml)
+[![Release](https://github.com/libreofficedocker/alpine/actions/workflows/release.yml/badge.svg)](https://github.com/libreofficedocker/alpine/actions/workflows/release.yml)
+[![Test](https://github.com/libreofficedocker/alpine/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/libreofficedocker/alpine/actions/workflows/test.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/libreofficedocker/alpine)](https://hub.docker.com/r/libreofficedocker/alpine)
 
 This image uses the [`alpine`](https://hub.docker.com/_/alpine) as base images.
