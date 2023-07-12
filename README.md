@@ -1,6 +1,6 @@
 ## About
 
-The base image for Libreoffice in Docker built on top of Alpine releases
+A ready-to-go Libreoffice in Docker built on top of Alpine releases
 
 ### Pre-built image
 
