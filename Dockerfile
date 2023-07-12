@@ -32,7 +32,9 @@ EOF
 RUN <<EOF
     set -euxo pipefail
     FONT_PKGS=""
-    if [ "$(echo "${ALPINE_VERSION} >= 3.13" | bc)" -eq 1 ]; then
+    if [ ${ALPINE_VERSION} = "edge" ]; then
+        FONT_PKGS="font-noto-all font-noto-cjk ttf-font-awesome ttf-hack"
+    elif [ "$(echo "${ALPINE_VERSION} >= 3.13" | bc)" -eq 1 ]; then
         FONT_PKGS="font-noto-all font-noto-cjk ttf-font-awesome ttf-hack"
     else
         FONT_PKGS="font-noto"
