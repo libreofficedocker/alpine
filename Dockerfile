@@ -35,6 +35,7 @@ RUN <<EOF
         bash curl tzdata \
         icu icu-libs ${ICU_PKGS} \
         libstdc++ dbus-x11 \
+        python3 py3-pip \
         ${ALPING_EXTRA_PKGS}
 EOF
 
