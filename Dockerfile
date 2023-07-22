@@ -1,5 +1,15 @@
 ARG ALPINE_VERSION
-FROM alpine:${ALPINE_VERSION}
+FROM alpine:${ALPINE_VERSION} AS base
+
+# Poorman process queue using "lockrun.c"
+# https://github.com/libreofficedocker/lockrun.c
+FROM base AS lockrun
+RUN apk add gcc musl-dev \
+    && wget -O lockrun.c https://github.com/libreofficedocker/lockrun.c/raw/main/lockrun.c \
+    && gcc lockrun.c -o lockrun
+
+# LibreOffice
+FROM base
 
 # Default to UTF-8 file.encoding
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
@@ -73,3 +83,6 @@ ENV PATH="/usr/lib/libreoffice/program:$PATH"
 ENV UNO_PATH="/usr/lib/libreoffice/program"
 ENV LD_LIBRARY_PATH="/usr/lib/libreoffice/program:/usr/lib/libreoffice/ure/lib:$LD_LIBRARY_PATH"
 ENV PYTHONPATH="/usr/lib/libreoffice/program:$PYTHONPATH"
+
+# lockrun
+COPY --from=lockrun /lockrun /usr/bin/lockrun
