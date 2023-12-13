@@ -22,7 +22,7 @@ ARG ALPING_EXTRA_PKGS=
 RUN <<EOF
     set -euxo pipefail
     ICU_PKGS=""
-    if [ ${ALPINE_VERSION} = "edge" ]; then
+    if [ $"{ALPINE_VERSION}" = "edge" ]; then
         ICU_PKGS="icu-data-full"
     elif [ "$(echo "${ALPINE_VERSION} < 3.13" | bc)" -eq 1 ]; then
         ICU_PKGS=""
@@ -43,7 +43,7 @@ EOF
 RUN <<EOF
     set -euxo pipefail
     FONT_PKGS=""
-    if [ ${ALPINE_VERSION} = "edge" ]; then
+    if [ "${ALPINE_VERSION}" = "edge" ]; then
         FONT_PKGS="font-noto-all font-noto-cjk ttf-font-awesome ttf-hack"
     elif [ "$(echo "${ALPINE_VERSION} >= 3.13" | bc)" -eq 1 ]; then
         FONT_PKGS="font-noto-all font-noto-cjk ttf-font-awesome ttf-hack"
