@@ -23,4 +23,4 @@ docker pull libreofficedocker/alpine:${ALPINE_VERSION}
 
 Licensed under [Apache-2.0 license](LICENSE)
 
-<!-- Trigger CI -->
+<!-- Trigger CI # -->
