@@ -53,7 +53,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: libreofficedocker/alpine
-          tags: type=raw,value=${{ matrix.version }}
+          tags: |
+            type=raw,value=${{ matrix.version }}
+            type=sha,prefix=${{ matrix.version }}-
 
       - name: Build and push
         uses: docker/bake-action@v3
