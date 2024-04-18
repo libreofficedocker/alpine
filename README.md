@@ -24,7 +24,7 @@ docker pull libreofficedocker/alpine:${ALPINE_VERSION}
 >
 > Runs at 00:00, only on Saturday every week.
 
-If you want to stick with a specific version, you can pull the image with the tag corresponding to a specific commit hash. Please check the [![Release](https://github.com/libreofficedocker/libreoffice-unoserver/actions/workflows/release.yml/badge.svg?branch=v2)](https://github.com/libreofficedocker/libreoffice-unoserver/actions/workflows/release.yml) workflow for the build and tags you want to use.
+If you want to stick with a specific version, you can pull the image with the tag corresponding to a specific commit hash. Please check the [![![Release](https://github.com/libreofficedocker/alpine/actions/workflows/release.yml/badge.svg)](https://github.com/libreofficedocker/alpine/actions/workflows/release.yml) workflow for the build and tags you want to use.
 
 ## License
 
