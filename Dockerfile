@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION
+ARG ALPINE_VERSION=edge
 FROM alpine:${ALPINE_VERSION} AS base
 
 # Poorman process queue using "lockrun.c"
