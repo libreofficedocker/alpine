@@ -6,8 +6,6 @@ target "docker-metadata-action" {}
 
 target "default" {
     inherits = ["docker-metadata-action"]
-    dockerfile = "Dockerfile"
-    context = "."
     args = {
         ALPINE_VERSION = "${ALPINE_VERSION}"
     }

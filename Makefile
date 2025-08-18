@@ -1,17 +1,12 @@
-DOCKER_BAKE_FILE := -f Makefile.docker-bake.hcl
-ALPINE_VERSION := 3.16
+DOCKER_BAKE_FILE := -f docker-bake.hcl -f hacks/docker-metadata-action.hcl
+ALPINE_VERSION := latest
 
+.EXPORT_ALL_VARIABLES:
 DOCKER_META_IMAGES := libreofficedocker/alpine
-DOCKER_META_VERSION := test
+DOCKER_META_VERSION := local-latest
+
+print:
+	docker buildx bake $(DOCKER_BAKE_FILE) --print
 
 build:
-	DOCKER_META_IMAGES=${DOCKER_META_IMAGES} DOCKER_META_VERSION=${DOCKER_META_VERSION} docker buildx bake --load $(DOCKER_BAKE_FILE)
-
-push:
-	docker push ${DOCKER_META_IMAGES}:${DOCKER_META_VERSION}
-
-run:
-	docker run -it --rm ${DOCKER_META_IMAGES}:${DOCKER_META_VERSION}
-
-shell:
-	docker run -it --rm ${DOCKER_META_IMAGES}:${DOCKER_META_VERSION} sh
+	docker buildx bake $(DOCKER_BAKE_FILE) --load --set="*.platform="
